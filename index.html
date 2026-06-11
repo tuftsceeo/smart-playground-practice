@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smart Playground — Command Buttons (practice harness)</title>
+
+  <!-- Same CDN dependencies the real web app uses: Tailwind for styling, Lucide for icons. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body { background: #e9ebef; }
+    @keyframes fade-in { from { opacity: 0; transform: scale(.97); } to { opacity: 1; transform: scale(1); } }
+    .animate-fade-in { animation: fade-in .15s ease-out; }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-6">
+
+  <!--
+    This page is a STANDALONE HARNESS. It is not the real app.
+    The real Smart Playground web app talks to an ESP32 hub over USB (PyScript + Web Serial),
+    which you can't run without the hardware. So this page imports the *real* command-palette
+    component (js/components/messaging/messageInput.js) and renders it with mock callbacks,
+    so you can see and verify your button changes in a normal browser.
+  -->
+
+  <!-- Phone-shaped frame so the palette looks like it does on a phone in the field. -->
+  <div class="bg-white rounded-[28px] shadow-2xl overflow-hidden border border-gray-200 flex flex-col"
+       style="width: 392px; height: 720px;">
+
+    <!-- Fake recipient header (cosmetic, so the palette has context) -->
+    <div class="px-4 py-3 flex items-center gap-3 border-b border-gray-100">
+      <span class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center">
+        <i data-lucide="radio" class="w-5 h-5 text-gray-400"></i>
+      </span>
+      <div>
+        <div class="font-bold text-gray-800 text-sm">All wands</div>
+        <div class="text-[11px] text-gray-400 font-semibold">6 connected · demo mode</div>
+      </div>
+    </div>
+
+    <!-- Fake message area (cosmetic) -->
+    <div class="flex-1 bg-gray-50 p-4 overflow-y-auto">
+      <div class="text-center text-[11px] text-gray-400 font-bold">Pick a command below, then tap send</div>
+    </div>
+
+    <!-- The REAL component renders here. -->
+    <div id="palette-root"></div>
+  </div>
+
+  <script type="module">
+    import { createMessageInput } from "./js/components/messaging/messageInput.js";
+
+    const root = document.getElementById("palette-root");
+
+    // Minimal local UI state for the harness (the real app keeps this in js/state/store.js).
+    const ui = {
+      currentMessage: "",   // selected command id, or "" for none
+      showPalette: true,    // keep the palette open so buttons are always visible
+    };
+
+    function render() {
+      root.innerHTML = "";
+
+      const input = createMessageInput(
+        ui.currentMessage,
+        ui.showPalette,
+        Boolean(ui.currentMessage),            // canSend
+        () => { ui.showPalette = !ui.showPalette; render(); },  // onInputClick
+        (command) => { ui.currentMessage = command.id; render(); },  // onCommandSelect
+        () => { ui.currentMessage = ""; render(); },            // onClearMessage
+        () => { alert("(demo) would send: " + ui.currentMessage); }, // onSendMessage
+        false                                  // flashMessageBox
+      );
+
+      root.appendChild(input);
+
+      // Lucide replaces <i data-lucide="..."> placeholders with SVGs. Re-run after each render.
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    render();
+  </script>
+</body>
+</html>

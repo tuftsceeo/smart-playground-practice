@@ -1,0 +1,13 @@
+{
+  "name": "smart-playground-practice",
+  "version": "1.0.0",
+  "description": "Intern practice repo: redesign the Smart Playground command buttons from a Claude Design file.",
+  "private": true,
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
