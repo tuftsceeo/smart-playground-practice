@@ -79,7 +79,8 @@ Two kinds of checks, and you should use both:
 
 1. **Automated:** `npm test` must pass. If you change the *shape* of the data (new fields, new
    invariants the design requires), add or update a test in `tests/commands.test.js` to cover it.
-2. **Visual:** `npm run dev`, open the page, and compare against the design. Click a button to
+2. **Visual:** `npm run dev`, open the page, and compare against the design reference
+   (`design/Command Buttons Design Reference.html`, open it in a browser). Click a button to
    confirm the selected/staged state works and the send button reacts.
 
 A change isn't done until both pass. Don't claim it works without actually running it.

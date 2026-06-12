@@ -44,6 +44,7 @@ practice:
 | Path | What it is |
 | --- | --- |
 | `index.html` | Practice harness — renders the command palette in a browser |
+| `design/Command Buttons Design Reference.html` | The button design from **Claude Design** — open in a browser; this is what you're implementing |
 | `js/utils/commands.json` | The list of games and each one's color, icon, and description |
 | `js/components/messaging/messageInput.js` | The command palette component (the buttons) |
 | `js/components/common/icons.js` | Builds the icon chips |

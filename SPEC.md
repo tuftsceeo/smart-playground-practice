@@ -5,15 +5,13 @@
 A designer mocked up a new look for the command palette in **Claude Design** and handed it off.
 Your job is to implement the relevant parts of that design in this codebase.
 
-**Design file:** <https://api.anthropic.com/v1/design/h/EqTid2KkhXfjG8D-J0v4rw?open_file=Command+Buttons.dc.html>
-
-Implement: **Command Buttons.dc.html**
+**Design file:** [`design/Command Buttons Design Reference.html`](design/Command%20Buttons%20Design%20Reference.html)
+— it's a self-contained page; just double-click it to open in your browser and view the mockup.
 
 In Claude Code, paste this as your starting instruction:
 
-> Fetch this design file, read its README, and implement the relevant aspects of the design.
-> https://api.anthropic.com/v1/design/h/EqTid2KkhXfjG8D-J0v4rw?open_file=Command+Buttons.dc.html
-> Implement: Command Buttons.dc.html
+> Read the design reference at `design/Command Buttons Design Reference.html` and implement the
+> relevant aspects of the design.
 
 ## What the design asks for (summary)
 
@@ -29,9 +27,9 @@ The design turns the flat gray command buttons into a **colorful "sticker tray."
 4. **A clear "picked" (staged) state.** The selected sticker shows a checkmark and stands out; it
    stages in the compose bar with a send button.
 
-> Read the design file itself for the exact colors, icons, sizes, and layout. The README inside the
-> handoff bundle tells you to read it top to bottom — do that. The HTML shows three layout
-> directions (A grid, B category trays, C die-cut). The bundle marks **Direction A / the category
+> Open the design reference (`design/Command Buttons Design Reference.html`) in a browser and read it
+> top to bottom for the exact colors, icons, sizes, and layout. The HTML shows three layout
+> directions (A grid, B category trays, C die-cut). It marks **Direction A / the category
 > trays as "Recommended."** If which direction to build is unclear, ask before implementing.
 
 ## Scope
@@ -71,7 +69,8 @@ Read its answer. Make sure it matches your own reading of `CLAUDE.md` and the fi
 
 Switch the model to **Opus** and ask it to **plan, not build**:
 
-> Based on SPEC.md and the design file, write a step-by-step implementation plan. List exactly which
+> Based on SPEC.md and the design reference (`design/Command Buttons Design Reference.html`), write a
+> step-by-step implementation plan. List exactly which
 > files change and why. Include the verification steps — what tests to add or run and what to check
 > visually — so we can prove it's done. Do not write the implementation yet.
 
